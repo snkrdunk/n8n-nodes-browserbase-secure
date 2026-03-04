@@ -51,6 +51,6 @@
         "n8n-workflow": "*"
     },
     "engines": {
-        "node": ">=22.16"
+        "node": ">=25.3.0"
     }
 }
