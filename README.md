@@ -1,4 +1,35 @@
-# n8n-nodes-browserbase
+# n8n-nodes-browserbase-secure
+
+[browserbase/n8n-node](https://github.com/browserbase/n8n-node) のセキュリティ強化フォークです。
+
+## Why fork?
+
+Browserbase の公式 n8n ノードは、ブラウザセッションの**録画**と**ログ記録**がデフォルトで有効になっています。これらのデータは Browserbase のサーバーに**最大 30 日間保存**されます。
+
+社内のバックオフィス業務自動化（経費処理、社内ツール操作など）では、ブラウザ上に従業員の個人情報や機密性の高い業務データが表示されます。それらがスクリーンショットや操作ログとして外部サーバーに蓄積されることは、情報セキュリティ上許容できません。
+
+このフォークでは、該当機能をコードレベルで無効化し、n8n の UI からもパラメータを除去することで、運用者が誤って有効化するリスクをゼロにしています。
+
+## 無効化した機能
+
+| 機能 | 公式デフォルト | 本フォーク | 無効化の理由 |
+|------|-------------|-----------|-------------|
+| **Session Recording** (`recordSession`) | `true` | `false` (ハードコード) | ブラウザ画面の録画が Browserbase サーバーに 30 日間保存される。社内システムの画面情報が外部に残るリスク。 |
+| **Session Logging** (`logSession`) | `true` | `false` (ハードコード) | 操作ログ（クリック座標、入力内容、DOM 操作）が記録・保存される。入力データやページ構造から機密情報が推測可能。 |
+
+いずれも n8n UI 上のパラメータ自体を削除しているため、ユーザーが再有効化することはできません。
+
+## Upstream との差分
+
+変更対象は `nodes/Browserbase/Browserbase.node.ts` の 1 ファイルのみです。
+
+1. `browserSettings` で `recordSession: false` / `logSession: false` をハードコード
+2. Browser Options の UI パラメータ定義から `Record Session` / `Log Session` を削除
+3. 対応する TypeScript 型定義を削除
+
+パッケージ名を `n8n-nodes-browserbase-secure` に変更し、公式パッケージとの競合を回避しています。
+
+---
 
 This is an n8n community node that lets you automate browsers using [Browserbase](https://browserbase.com) powered by [Stagehand](https://stagehand.dev) in your n8n workflows.
 
