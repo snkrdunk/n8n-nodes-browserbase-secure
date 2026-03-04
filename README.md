@@ -1,33 +1,33 @@
 # n8n-nodes-browserbase-secure
 
-[browserbase/n8n-node](https://github.com/browserbase/n8n-node) のセキュリティ強化フォークです。
+A security-hardened fork of [browserbase/n8n-node](https://github.com/browserbase/n8n-node) for organizations that handle sensitive data in browser automation workflows.
 
-## Why fork?
+## Why This Fork Exists
 
-Browserbase の公式 n8n ノードは、ブラウザセッションの**録画**と**ログ記録**がデフォルトで有効になっています。これらのデータは Browserbase のサーバーに**最大 30 日間保存**されます。
+The official Browserbase n8n node enables **session recording** and **session logging** by default. These features capture browser screenshots, click coordinates, input values, and DOM operations — all stored on Browserbase servers for up to **30 days**.
 
-社内のバックオフィス業務自動化（経費処理、社内ツール操作など）では、ブラウザ上に従業員の個人情報や機密性の高い業務データが表示されます。それらがスクリーンショットや操作ログとして外部サーバーに蓄積されることは、情報セキュリティ上許容できません。
+For back-office automation (expense processing, internal tool operations, HR workflows, etc.), browser sessions routinely display employee personal information and confidential business data. Having this data recorded and stored on a third-party server is an unacceptable security risk.
 
-このフォークでは、該当機能をコードレベルで無効化し、n8n の UI からもパラメータを除去することで、運用者が誤って有効化するリスクをゼロにしています。
+This fork **permanently disables** these features at the code level and removes the corresponding UI parameters, ensuring that no workflow builder can accidentally or intentionally re-enable them.
 
-## 無効化した機能
+## Disabled Features
 
-| 機能 | 公式デフォルト | 本フォーク | 無効化の理由 |
-|------|-------------|-----------|-------------|
-| **Session Recording** (`recordSession`) | `true` | `false` (ハードコード) | ブラウザ画面の録画が Browserbase サーバーに 30 日間保存される。社内システムの画面情報が外部に残るリスク。 |
-| **Session Logging** (`logSession`) | `true` | `false` (ハードコード) | 操作ログ（クリック座標、入力内容、DOM 操作）が記録・保存される。入力データやページ構造から機密情報が推測可能。 |
+| Feature | Upstream Default | This Fork | Why Disabled |
+|---------|:---:|:---:|---|
+| **Session Recording** (`recordSession`) | `true` | `false` (hardcoded) | Browser screen recordings are stored on Browserbase servers for 30 days. Internal system screens would be exposed to a third party. |
+| **Session Logging** (`logSession`) | `true` | `false` (hardcoded) | Operation logs (click coordinates, input content, DOM operations) are recorded and stored. Sensitive data can be inferred from input values and page structure. |
 
-いずれも n8n UI 上のパラメータ自体を削除しているため、ユーザーが再有効化することはできません。
+Both UI parameters are removed entirely — users cannot re-enable these features from the n8n interface.
 
-## Upstream との差分
+## Changes from Upstream
 
-変更対象は `nodes/Browserbase/Browserbase.node.ts` の 1 ファイルのみです。
+Only `nodes/Browserbase/Browserbase.node.ts` is modified:
 
-1. `browserSettings` で `recordSession: false` / `logSession: false` をハードコード
-2. Browser Options の UI パラメータ定義から `Record Session` / `Log Session` を削除
-3. 対応する TypeScript 型定義を削除
+1. `browserSettings` hardcodes `recordSession: false` and `logSession: false`
+2. `Record Session` and `Log Session` UI parameter definitions removed from Browser Options
+3. Corresponding TypeScript type definitions removed
 
-パッケージ名を `n8n-nodes-browserbase-secure` に変更し、公式パッケージとの競合を回避しています。
+Package renamed to `n8n-nodes-browserbase-secure` to avoid conflicts with the official package.
 
 ---
 

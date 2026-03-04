@@ -8,12 +8,12 @@
         "n8n-community-node-package"
     ],
     "author": {
-        "name": "Browserbase",
-        "email": "support@browserbase.com"
+        "name": "SODA inc.",
+        "url": "https://github.com/snkrdunk"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/browserbase/n8n-node"
+        "url": "https://github.com/snkrdunk/n8n-nodes-browserbase-secure"
     },
     "scripts": {
         "build": "n8n-node build",
