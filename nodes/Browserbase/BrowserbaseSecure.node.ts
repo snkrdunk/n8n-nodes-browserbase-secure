@@ -10,7 +10,7 @@ import {
 
 const BASE_URL = 'https://api.stagehand.browserbase.com';
 
-export class Browserbase implements INodeType {
+export class BrowserbaseSecure implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Browserbase Agent (Secure)',
 		name: 'browserbaseSecure',
