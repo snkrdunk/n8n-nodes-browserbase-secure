@@ -1,6 +1,6 @@
 {
     "name": "n8n-nodes-browserbase-secure",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Security-hardened Browserbase node for n8n — session recording and logging permanently disabled",
     "license": "MIT",
     "homepage": "",
@@ -9,6 +9,7 @@
     ],
     "author": {
         "name": "SODA inc.",
+        "email": "aiops@soda-inc.jp",
         "url": "https://soda-inc.jp/"
     },
     "repository": {
