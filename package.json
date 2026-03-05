@@ -37,7 +37,7 @@
             "dist/credentials/BrowserbaseApi.credentials.js"
         ],
         "nodes": [
-            "dist/nodes/Browserbase/Browserbase.node.js"
+            "dist/nodes/Browserbase/BrowserbaseSecure.node.js"
         ]
     },
     "devDependencies": {

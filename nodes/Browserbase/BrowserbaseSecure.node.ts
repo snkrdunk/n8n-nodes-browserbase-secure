@@ -12,8 +12,8 @@ const BASE_URL = 'https://api.stagehand.browserbase.com';
 
 export class Browserbase implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Browserbase Agent',
-		name: 'browserbase',
+		displayName: 'Browserbase Agent (Secure)',
+		name: 'browserbaseSecure',
 		icon: 'file:../../icons/browserbase.svg',
 		group: ['transform'],
 		version: 2,
@@ -21,7 +21,7 @@ export class Browserbase implements INodeType {
 		description:
 			'AI-powered browser automation. Provide a URL and instruction, get results. Supports CUA (vision), DOM (selectors), and Hybrid modes.',
 		defaults: {
-			name: 'Browserbase Agent',
+			name: 'Browserbase Agent (Secure)',
 		},
 		inputs: [NodeConnectionTypes.Main],
 		outputs: [NodeConnectionTypes.Main],
