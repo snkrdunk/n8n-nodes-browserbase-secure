@@ -1,4 +1,35 @@
-# n8n-nodes-browserbase
+# n8n-nodes-browserbase-secure
+
+A security-hardened fork of [browserbase/n8n-node](https://github.com/browserbase/n8n-node) for organizations that handle sensitive data in browser automation workflows.
+
+## Why This Fork Exists
+
+The official Browserbase n8n node enables **session recording** and **session logging** by default. These features capture browser screenshots, click coordinates, input values, and DOM operations — all stored on Browserbase servers for up to **30 days**.
+
+For back-office automation (expense processing, internal tool operations, HR workflows, etc.), browser sessions routinely display employee personal information and confidential business data. Having this data recorded and stored on a third-party server is an unacceptable security risk.
+
+This fork **permanently disables** these features at the code level and removes the corresponding UI parameters, ensuring that no workflow builder can accidentally or intentionally re-enable them.
+
+## Disabled Features
+
+| Feature | Upstream Default | This Fork | Why Disabled |
+|---------|:---:|:---:|---|
+| **Session Recording** (`recordSession`) | `true` | `false` (hardcoded) | Browser screen recordings are stored on Browserbase servers for 30 days. Internal system screens would be exposed to a third party. |
+| **Session Logging** (`logSession`) | `true` | `false` (hardcoded) | Operation logs (click coordinates, input content, DOM operations) are recorded and stored. Sensitive data can be inferred from input values and page structure. |
+
+Both UI parameters are removed entirely — users cannot re-enable these features from the n8n interface.
+
+## Changes from Upstream
+
+Only `nodes/Browserbase/Browserbase.node.ts` is modified:
+
+1. `browserSettings` hardcodes `recordSession: false` and `logSession: false`
+2. `Record Session` and `Log Session` UI parameter definitions removed from Browser Options
+3. Corresponding TypeScript type definitions removed
+
+Package renamed to `n8n-nodes-browserbase-secure` to avoid conflicts with the official package.
+
+---
 
 This is an n8n community node that lets you automate browsers using [Browserbase](https://browserbase.com) powered by [Stagehand](https://stagehand.dev) in your n8n workflows.
 

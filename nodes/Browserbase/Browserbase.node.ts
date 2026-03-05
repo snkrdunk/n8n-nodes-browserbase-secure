@@ -479,13 +479,6 @@ export class Browserbase implements INodeType {
 						description: 'Whether to block ads during browsing',
 					},
 					{
-						displayName: 'Log Session',
-						name: 'logSession',
-						type: 'boolean',
-						default: true,
-						description: 'Whether to enable session logging',
-					},
-					{
 						displayName: 'OS',
 						name: 'os',
 						type: 'options',
@@ -499,13 +492,6 @@ export class Browserbase implements INodeType {
 						],
 						default: '',
 						description: 'OS for advanced stealth mode. Controls user agent and browser environment signals.',
-					},
-					{
-						displayName: 'Record Session',
-						name: 'recordSession',
-						type: 'boolean',
-						default: true,
-						description: 'Whether to record the browser session for replay',
 					},
 					{
 						displayName: 'Solve Captchas',
@@ -649,13 +635,11 @@ export class Browserbase implements INodeType {
 					i,
 					{},
 				) as {
-					recordSession?: boolean;
 					solveCaptchas?: boolean;
 					blockAds?: boolean;
 					advancedStealth?: boolean;
 					viewportWidth?: number;
 					viewportHeight?: number;
-					logSession?: boolean;
 					os?: string;
 				};
 				const sessionOptions = this.getNodeParameter(
@@ -716,11 +700,11 @@ export class Browserbase implements INodeType {
 				try {
 					// 1. Start session
 					const browserSettings: Record<string, unknown> = {
-						recordSession: browserOptions.recordSession ?? true,
+						recordSession: false,
 						solveCaptchas: browserOptions.solveCaptchas ?? false,
 						blockAds: browserOptions.blockAds ?? true,
 						advancedStealth: browserOptions.advancedStealth ?? false,
-						logSession: browserOptions.logSession ?? true,
+						logSession: false,
 						viewport: {
 							width: browserOptions.viewportWidth ?? 1288,
 							height: browserOptions.viewportHeight ?? 711,

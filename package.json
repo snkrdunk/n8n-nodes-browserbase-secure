@@ -1,19 +1,19 @@
 {
-    "name": "n8n-nodes-browserbase",
-    "version": "1.1.3",
-    "description": "n8n community node for Browserbase",
+    "name": "n8n-nodes-browserbase-secure",
+    "version": "1.0.0",
+    "description": "Security-hardened Browserbase node for n8n — session recording and logging permanently disabled",
     "license": "MIT",
     "homepage": "",
     "keywords": [
         "n8n-community-node-package"
     ],
     "author": {
-        "name": "Browserbase",
-        "email": "support@browserbase.com"
+        "name": "SODA inc.",
+        "url": "https://soda-inc.jp/"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/browserbase/n8n-node"
+        "url": "https://github.com/snkrdunk/n8n-nodes-browserbase-secure"
     },
     "scripts": {
         "build": "n8n-node build",
@@ -49,5 +49,8 @@
     },
     "peerDependencies": {
         "n8n-workflow": "*"
+    },
+    "engines": {
+        "node": ">=25.3.0"
     }
 }
